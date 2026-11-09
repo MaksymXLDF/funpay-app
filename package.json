@@ -1,6 +1,6 @@
 {
   "name": "funpay-desktop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FunPay desktop app",
   "main": "main.js",
   "scripts": {
@@ -15,7 +15,12 @@
     "appId": "com.example.funpay",
     "productName": "FunPay",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "artifactName": "FunPay.exe V${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }
