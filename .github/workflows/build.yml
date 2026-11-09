@@ -1,16 +1,16 @@
-name: Build and release Windows app
+name: Build and release FunPay
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  build-and-release:
     runs-on: windows-latest
 
     steps:
@@ -28,18 +28,12 @@ jobs:
       - name: Build Windows installer
         run: npm run dist
 
-      - name: Upload installer as workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: FunPay-Windows
-          path: dist/*.exe
-          if-no-files-found: error
-
-      - name: Create GitHub Release and upload installer
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Create release and upload installer
         uses: softprops/action-gh-release@v2
         with:
-          name: FunPay ${{ github.ref_name }}
+          tag_name: build-${{ github.run_number }}
+          name: FunPay build ${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
           generate_release_notes: true
           files: dist/*.exe
           fail_on_unmatched_files: true
