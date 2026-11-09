@@ -1,0 +1,21 @@
+{
+  "name": "funpay-desktop",
+  "version": "1.0.0",
+  "description": "FunPay desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.example.funpay",
+    "productName": "FunPay",
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
